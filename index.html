@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENAGY Search</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <input type="text" id="search-json-input" />
+    <input type="button" id="search-json-submit" value="search" />
+    <h4>Search Results</h4>
+    <ol id="search-output">
+
+    </ol>
+
+    <script>
+        var getInput = document.querySelector('#search-json-input');
+        var getBtn = document.querySelector('#search-json-submit');
+        var list = document.querySelector('#search-output');
+
+        var dataApi = 'data.json';
+
+        function start() {
+            getData(renderDatas);
+
+            //handleSearch(renderDatas);
+        }
+        start(getData);
+        // setTimeout(function() {
+        //     start();
+        // }, 9000);
+        //functions
+        function getData(callback) {
+            fetch(dataApi)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(callback);
+        }
+
+        function renderDatas(datas) {
+
+            //console.log(datas.products);
+            var dulieu = datas.products;
+            var datasearch = 'egaCRO';
+            var name;
+            getBtn.onclick = function () {
+                var name = getInput.value;
+                console.log(name.toString);
+            }
+
+
+            console.log(typeof name);
+            var dataout = dulieu.filter(item => {
+                return item.title.trim().toLowerCase().includes(datasearch.trim().toLocaleLowerCase());
+            })
+            // console.log(dataout);
+            var htmls = dataout.map(function (data) {
+                return `
+                    <li>
+                        <p>Handle: ${dataout[0].handle}</p>
+                        <p>Title: ${dataout[0].title}</p>
+                        <p>Title: ${dataout[0].variants[0].price} đ</p>
+                        <img src="${dataout[0].image.src}">
+                    </li>
+                `;
+            })
+            return list.innerHTML = htmls.join('');
+        }
+
+
+        // function handleSearch(renderDatas) {
+
+        //     getBtn.onclick = function() {
+        //          var name = getInput.value;
+        //          console.log(renderDatas);
+        //     }
+        // }
+    </script>
+</body>
+
+</html>
