@@ -57,8 +57,8 @@
 
         function start() {
             //getData(renderDatas);
-            getData(handleSearch)
-            handleSearch(renderDatas);
+            getData(handleSearch);
+            //handleSearch(renderDatas);
         }
         start();
 
@@ -89,7 +89,7 @@
                 })
                 var htmls = dataout.map(function (data) {
                 return `
-                    <li>
+                    <li id="list-item">
                         <p>Handle: ${dataout[0].handle}</p>
                         <p>Title: ${dataout[0].title}</p>
                         <p>Giá: ${dataout[0].variants[0].compare_at_price} đ</p>
@@ -99,7 +99,10 @@
                 `;
             })
             document.getElementById('demo').innerHTML = x;
-            return list.innerHTML = htmls.join('');
+            //document.querySelector('#list-item img').style.width = '200px';
+            if (isNaN(x)) {
+                return list.innerHTML = htmls.join('');
+            }
 
             })
         }
