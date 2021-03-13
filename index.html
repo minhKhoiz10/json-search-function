@@ -56,7 +56,7 @@
         var dataApi = 'data.json';
 
         function start() {
-            getData(renderDatas);
+            //getData(renderDatas);
             getData(handleSearch)
             handleSearch(renderDatas);
         }
@@ -92,7 +92,8 @@
                     <li>
                         <p>Handle: ${dataout[0].handle}</p>
                         <p>Title: ${dataout[0].title}</p>
-                        <p>Gia ban: ${dataout[0].variants[0].price} đ</p>
+                        <p>Giá: ${dataout[0].variants[0].compare_at_price} đ</p>
+                        <p>Giá khuyến mãi: ${dataout[0].variants[0].price} đ</p>
                         <img src="${dataout[0].image.src}">
                     </li>
                 `;
